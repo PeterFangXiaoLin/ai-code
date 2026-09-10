@@ -25,6 +25,7 @@
 - Vue Router
 - Pinia
 - ESLint、Oxlint、Oxfmt
+- Ant Design Vue
 
 前端通过 Vue 官方脚手架命令创建：
 
@@ -106,14 +107,27 @@ npm run preview     # 本地预览生产构建
 
 `oxlint` 与 `eslint-plugin-oxlint` 当前均使用 `1.73.x`。二者存在 peer dependency 约束，升级时应同步检查兼容版本，不要使用 `--force` 或 `--legacy-peer-deps` 掩盖版本冲突。
 
-## 当前后端基础能力
 
-- 统一响应结构 `BaseResponse<T>`
-- 响应构造工具 `ResultUtils`
-- 业务异常、错误码与全局异常处理
-- 全局 CORS 配置
-- AOP 代理支持
-- Knife4j 接口文档
-- 健康检查接口
 
-业务功能、数据库模型和前后端接口联调仍待后续实现。
+### 前端初始化修改
+
+引入 Ant Design Vue https://antdv.com/docs/vue/getting-started
+
+使用 AI 生成logo 和网站图标
+
+使用 AI 生成布局
+
+全局布局位于 `ai-code-frontend/src/layouts/BasicLayout.vue`，由 `App.vue` 引入，使用 Ant Design Vue 的 Layout 组件组织导航栏、路由内容区和底栏。内容区独立滚动，底栏始终位于视口底部。
+
+导航菜单在 `ai-code-frontend/src/config/menu.ts` 中配置；新增菜单时需同步在 `src/router/index.ts` 注册对应路由。`GlobalHeader.vue` 和 `GlobalFooter.vue` 分别负责导航与版权信息。登录按钮目前仅展示功能预告提示，尚未接入认证。
+
+
+
+引入 axios，并自定义全局请求
+
+引入 OpenApi 工具 生成前端调用后端接口的代码
+
+删除无用文件，组件国际化
+
+
+
