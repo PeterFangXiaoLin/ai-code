@@ -118,9 +118,19 @@ npm run preview     # 本地预览生产构建
 
 使用 AI 生成布局
 
-全局布局位于 `ai-code-frontend/src/layouts/BasicLayout.vue`，由 `App.vue` 引入，使用 Ant Design Vue 的 Layout 组件组织导航栏、路由内容区和底栏。内容区独立滚动，底栏始终位于视口底部。
+普通页面布局位于 `ai-code-frontend/src/layouts/BasicLayout.vue`，管理布局位于 `src/layouts/AdminLayout.vue`，由路由选择布局，`App.vue` 负责全局配置和登录状态初始化。普通页面内容区独立滚动，底栏始终位于视口底部；管理端使用独立左侧菜单。
 
-导航菜单在 `ai-code-frontend/src/config/menu.ts` 中配置；新增菜单时需同步在 `src/router/index.ts` 注册对应路由。`GlobalHeader.vue` 和 `GlobalFooter.vue` 分别负责导航与版权信息。登录按钮目前仅展示功能预告提示，尚未接入认证。
+导航菜单在 `ai-code-frontend/src/config/menu.ts` 中配置，使用 `audience` 区分普通页面和管理页面；新增菜单时需同步在 `src/router/routes.ts` 注册对应路由。`GlobalHeader.vue` 和 `GlobalFooter.vue` 分别负责导航与版权信息，`UserAccountMenu.vue` 复用登录状态展示和退出登录功能。
+
+### 管理端与权限
+
+- 管理员角色值为 `admin`。管理员登录后默认进入 `/admin/userManage`，仅展示管理菜单；访问首页、登录页或其他普通页面时自动返回管理端。
+- 游客直接访问 `/admin` 下的地址会跳到登录页并保留来源；普通用户访问时显示 403 页面。路由守卫先等待登录状态初始化，刷新管理页不会提前判定为无权限。
+- `src/router/accessGuard.ts` 负责访问权限；`authRedirect.ts` 仅负责安全的登录返回地址。新增管理页面应放在 `/admin` 布局的子路由中，继承 `requiresAdmin`。
+- 用户管理支持账号、昵称、角色筛选、服务端分页及创建时间排序，以及新增、编辑和删除。账号创建后不可编辑；新增账号初始密码沿用后端的 `12345678`。当前账号不可在页面中删除或降级。
+- 前端菜单和路由控制用于界面隔离；实际接口权限由后端 `@AuthCheck` 校验。
+
+在前端模块运行 `node --test tests/*.test.mjs` 可验证认证、路由权限及用户管理数据处理。`node tests/admin-preview.mjs` 可启动端口 5176 的独立界面测试环境，使用内存示例数据，不连接真实后端。该脚本不参与正常开发启动和生产构建。
 
 
 
@@ -166,3 +176,10 @@ npm run preview     # 本地预览生产构建
 
 
 
+#### 用户模块前端开发
+
+先定义出需要使用的文件，并配置到 route.ts 中
+
+定义 全局变量或者叫全局状态管理，保存当前登录的用户信息
+
+修改顶部导航条，增加获取当前登录的用户信息

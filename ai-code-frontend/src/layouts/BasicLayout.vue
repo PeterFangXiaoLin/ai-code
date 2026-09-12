@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-import GlobalHeader from '@/components/GlobalHeader.vue'
-import GlobalFooter from '@/components/GlobalFooter.vue'
-</script>
-
 <template>
   <a-layout class="basic-layout">
     <a-layout-header class="layout-header">
@@ -21,6 +15,12 @@ import GlobalFooter from '@/components/GlobalFooter.vue'
     </a-layout-footer>
   </a-layout>
 </template>
+
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+import GlobalHeader from '@/components/GlobalHeader.vue'
+import GlobalFooter from '@/components/GlobalFooter.vue'
+</script>
 
 <style scoped>
 .basic-layout {

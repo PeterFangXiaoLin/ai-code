@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { RouterLink } from 'vue-router'
-</script>
-
 <template>
   <a-card :bordered="false">
     <a-space direction="vertical" :size="16">
@@ -18,3 +14,7 @@ import { RouterLink } from 'vue-router'
     </a-space>
   </a-card>
 </template>
+
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+</script>

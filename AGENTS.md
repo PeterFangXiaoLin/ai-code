@@ -35,6 +35,7 @@ mvn clean package
 ## 前端约定
 
 - 使用 Vue 单文件组件、TypeScript 和 Composition API；新组件优先采用 `<script setup lang="ts">`。
+- Vue 单文件组件（`.vue`）的区块顺序统一为：先 `<template>`，再 `<script>`，最后 `<style>`。
 - 构建前端界面时，优先使用 Ant Design Vue 提供的现成组件。
 - 页面放在 `src/views/`，通用组件放在 `src/components/`，路由集中维护在 `src/router/`，跨页面状态使用 `src/stores/` 下的 Pinia store。
 - 沿用现有路径别名和 TypeScript/Vite 配置，避免无必要地改动脚手架基础配置。
