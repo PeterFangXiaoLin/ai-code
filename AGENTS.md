@@ -6,7 +6,7 @@
 
 这是一个前后端分离仓库，不是 Maven 或 npm 的统一工作区：
 
-- `ai-code-backend/`：Java 21、Spring Boot 3.5.16、Maven。
+- `ai-code-backend/`：Java 21、Spring Boot 3.5.16、Maven、Mybatis-Flex、MySQL。
 - `ai-code-frontend/`：Vue 3、TypeScript、Vite、npm、Ant Design Vue。
 
 运行命令前先进入对应模块，不要在仓库根目录执行 `mvn` 或 `npm` 命令。
