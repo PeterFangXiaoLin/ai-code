@@ -6,3 +6,6 @@ target/
 .settings/
 .vscode/
 *.log
+
+### CUSTOM ###
+application-local.yml
